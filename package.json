@@ -1,0 +1,27 @@
+{
+  "name": "multi-bot-arena",
+  "version": "1.0.0",
+  "description": "Unified desktop platform to embed and compare Claude, DeepSeek, Gemini, ChatGPT, Grok, and Perplexity",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "keywords": [
+    "ai",
+    "chatbots",
+    "arena",
+    "electron",
+    "claude",
+    "chatgpt",
+    "gemini",
+    "deepseek",
+    "grok",
+    "perplexity"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^33.2.1"
+  }
+}
+

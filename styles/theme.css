@@ -1,0 +1,146 @@
+/* ==========================================================================
+   SCARLET LIQUID GLASS THEME (Actual Optical Lens Blur & Chromatic Specular)
+   ========================================================================== */
+
+:root {
+  /* Scarlet Palette */
+  --scarlet-core: #ff2a5f;
+  --scarlet-bright: #ff4d79;
+  --scarlet-deep: #be123c;
+  --scarlet-dark: #881337;
+  --scarlet-glow: rgba(255, 42, 95, 0.45);
+  --scarlet-glow-soft: rgba(255, 42, 95, 0.18);
+
+  /* Obsidian / Crimson Surfaces */
+  --bg-obsidian: #090204;
+  --bg-garnet-subtle: #120408;
+  --glass-surface-base: rgba(18, 5, 10, 0.65);
+  --glass-surface-elevated: rgba(28, 7, 16, 0.75);
+  --glass-surface-hover: rgba(45, 12, 26, 0.82);
+  --glass-surface-active: rgba(255, 42, 95, 0.16);
+
+  /* Specular & Refractive Borders */
+  --border-glass: rgba(255, 60, 100, 0.2);
+  --border-glass-bright: rgba(255, 100, 140, 0.4);
+  --border-glass-subtle: rgba(255, 255, 255, 0.08);
+
+  /* Lens Blur / Optics */
+  --lens-blur-heavy: blur(28px) saturate(210%) contrast(95%);
+  --lens-blur-medium: blur(18px) saturate(190%) contrast(95%);
+  --lens-blur-light: blur(10px) saturate(160%);
+
+  /* Typography */
+  --text-pure: #ffffff;
+  --text-scarlet-tint: #fed7e2;
+  --text-muted-scarlet: #c48b9f;
+  --text-dim: #7f5163;
+
+  /* Specular Sheen Shadows */
+  --sheen-inner: inset 0 1px 1px 0 rgba(255, 255, 255, 0.22), inset 0 -1px 1px 0 rgba(255, 42, 95, 0.15);
+  --shadow-liquid: 0 12px 40px 0 rgba(0, 0, 0, 0.65);
+  --shadow-scarlet-radiant: 0 6px 24px 0 rgba(255, 42, 95, 0.4);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--bg-obsidian);
+  color: var(--text-pure);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Ambient Optical Liquid Light Orbs (Glows behind the lens glass) */
+body::before {
+  content: '';
+  position: absolute;
+  top: -15%;
+  left: 10%;
+  width: 550px;
+  height: 550px;
+  background: radial-gradient(circle, rgba(255, 42, 95, 0.28) 0%, rgba(190, 18, 60, 0.12) 40%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(60px);
+  animation: liquidPulse 14s ease-in-out infinite alternate;
+}
+
+body::after {
+  content: '';
+  position: absolute;
+  bottom: -15%;
+  right: 8%;
+  width: 650px;
+  height: 650px;
+  background: radial-gradient(circle, rgba(225, 29, 72, 0.25) 0%, rgba(136, 19, 55, 0.15) 45%, transparent 75%);
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(70px);
+  animation: liquidPulse 18s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes liquidPulse {
+  0% { transform: scale(1) translate(0, 0); opacity: 0.8; }
+  50% { transform: scale(1.15) translate(30px, -20px); opacity: 1; }
+  100% { transform: scale(0.95) translate(-25px, 25px); opacity: 0.85; }
+}
+
+/* Glassmorphism Primitives with Actual Optical Lens Blur */
+.glass-panel {
+  background: var(--glass-surface-base);
+  backdrop-filter: var(--lens-blur-heavy);
+  -webkit-backdrop-filter: var(--lens-blur-heavy);
+  border: 1px solid var(--border-glass);
+  box-shadow: var(--sheen-inner), var(--shadow-liquid);
+  border-radius: 12px;
+}
+
+.glass-header {
+  background: var(--glass-surface-elevated);
+  backdrop-filter: var(--lens-blur-medium);
+  -webkit-backdrop-filter: var(--lens-blur-medium);
+  border-bottom: 1px solid var(--border-glass);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
+}
+
+.glass-card {
+  background: var(--glass-surface-elevated);
+  backdrop-filter: var(--lens-blur-heavy);
+  -webkit-backdrop-filter: var(--lens-blur-heavy);
+  border: 1px solid var(--border-glass-bright);
+  box-shadow: var(--sheen-inner), var(--shadow-liquid);
+  border-radius: 14px;
+}
+
+.glass-pill {
+  background: var(--glass-surface-base);
+  backdrop-filter: var(--lens-blur-light);
+  -webkit-backdrop-filter: var(--lens-blur-light);
+  border: 1px solid var(--border-glass-subtle);
+  color: var(--text-scarlet-tint);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-pill:hover {
+  background: var(--glass-surface-hover);
+  border-color: var(--border-glass);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.glass-pill.active {
+  background: linear-gradient(135deg, rgba(255, 42, 95, 0.22) 0%, rgba(190, 18, 60, 0.15) 100%);
+  border-color: var(--scarlet-core);
+  box-shadow: 0 0 14px var(--scarlet-glow-soft), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
